@@ -6,7 +6,6 @@ export const styles = StyleSheet.create({
     flex: 1,
     padding: 24,
     backgroundColor: COLORS.background,
-    justifyContent: "center",
   },
   title: {
     fontSize: 28,
