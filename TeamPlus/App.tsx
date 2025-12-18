@@ -1,21 +1,32 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import DashboardScreen from './src/screens/Dashboard/DashboardScreen';
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import DashboardScreen from "./src/screens/Dashboard/DashboardScreen";
+import StatusListScreen from "./src/screens/StatusList/StatusListScreen";
+import StatusDetailScreen from "./src/screens/StatusDetail/StatusDetailScreen";
+import AddStatusScreen from "./src/screens/AddStatus/AddStatusScreen";
+import { StatusProvider } from "./src/context/StatusContext";
+
+export type RootStackParamList = {
+  Dashboard: undefined;
+  AddStatus: undefined;
+  StatusList: undefined;
+  StatusDetail: { id: string };
+};
+
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <StatusBar style="auto" />
-      <DashboardScreen/>
-    </View>
+    <StatusProvider>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen name="Dashboard" component={DashboardScreen} />
+          <Stack.Screen name="AddStatus" component={AddStatusScreen} />
+          <Stack.Screen name="StatusList" component={StatusListScreen} />
+          <Stack.Screen name="StatusDetail" component={StatusDetailScreen} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </StatusProvider>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#7be6ddff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});

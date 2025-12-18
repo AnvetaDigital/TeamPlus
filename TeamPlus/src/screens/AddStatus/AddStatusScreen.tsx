@@ -2,13 +2,15 @@ import { View, TextInput, Pressable, Text } from "react-native";
 import { useState } from "react";
 import { useStatus } from "../../context/StatusContext";
 import { Status } from "../../types/status";
-import { useNavigation } from "@react-navigation/native";
 import { styles } from "./styles";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { RootStackParamList } from "../../../App";
 
-export default function AddStatusScreen() {
+type Props = NativeStackScreenProps<RootStackParamList, "AddStatus">;
+
+export default function AddStatusScreen({navigation}: Props) {
   const { addStatus } = useStatus();
 
-  const navigation = useNavigation();
   const [yesterday, setYesterday] = useState("");
   const [today, setToday] = useState("");
   const [blockers, setBlockers] = useState("");
@@ -26,7 +28,7 @@ export default function AddStatusScreen() {
     };
 
     addStatus(newStatus);
-    navigation.goBack();
+    navigation.replace("StatusList");
   };
 
   return (
