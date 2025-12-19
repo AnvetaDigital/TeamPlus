@@ -9,6 +9,7 @@ import { StatusProvider } from "./src/context/StatusContext";
 export type RootStackParamList = {
   Dashboard: undefined;
   AddStatus: undefined;
+  EditStatus: { id: string };
   StatusList: undefined;
   StatusDetail: { id: string };
 };
@@ -20,10 +21,34 @@ export default function App() {
     <StatusProvider>
       <NavigationContainer>
         <Stack.Navigator>
-          <Stack.Screen name="Dashboard" component={DashboardScreen} />
-          <Stack.Screen name="AddStatus" component={AddStatusScreen} />
-          <Stack.Screen name="StatusList" component={StatusListScreen} />
-          <Stack.Screen name="StatusDetail" component={StatusDetailScreen} />
+          <Stack.Screen
+            name="Dashboard"
+            component={DashboardScreen}
+            options={{
+              title: "TeamPlus",
+              headerBackVisible: false,
+            }}
+          />
+          <Stack.Screen
+            name="AddStatus"
+            component={AddStatusScreen}
+            options={{ title: "Add Status" }}
+          />
+          <Stack.Screen
+            name="EditStatus"
+            component={AddStatusScreen}
+            options={{ title: "Edit Status" }}
+          />
+          <Stack.Screen
+            name="StatusList"
+            component={StatusListScreen}
+            options={{ title: "Team Status" }}
+          />
+          <Stack.Screen
+            name="StatusDetail"
+            component={StatusDetailScreen}
+            options={{ title: "Status Detail" }}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </StatusProvider>
